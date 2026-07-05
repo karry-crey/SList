@@ -21,3 +21,15 @@ void SLTPushFront(SLTNode** pphead, SLTDataType x);
 
 void SLTPopBack(SLTNode** pphead);
 void SLTPopFront(SLTNode** pphead);
+
+SLTNode* SLTFind(SLTNode* phead,SLTDataType x);
+
+//insert data before the specified position
+void SLTInsert(SLTNode** pphead,SLTNode* pos, SLTDataType x);
+//insert data after the specified position
+void SLTInsertAfter(SLTNode* pos, SLTDataType x);
+
+void SLTErase(SLTNode** pphead, SLTNode* pos);
+void SLTEraseAfter(SLTNode* pos);
+
+void SListDestroy(SLTNode** pphesd);

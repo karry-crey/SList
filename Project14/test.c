@@ -25,6 +25,17 @@ void test02(){
 	SLTNode* plist = NULL;
 	SLTPrint(plist);
 	SLTPushBack(&plist, 1);
+	SLTPushBack(&plist, 2);
+	SLTPushBack(&plist, 3);
+	SLTPushBack(&plist, 4);
+	SLTPrint(plist);
+
+	SLTNode* find = SLTFind(plist, 1);
+	//SLTInsert(&plist, find, 100);
+	//SLTInsertAfter(find, 100);
+	SLTEraseAfter(find);
+	SLTPrint(plist);
+	SListDestroy(&plist);
 	SLTPrint(plist);
 }
 

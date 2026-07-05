@@ -87,4 +87,74 @@ void SLTPopFront(SLTNode** pphead) {
 		*pphead = next;
 	//}
 }
-	
+SLTNode* SLTFind(SLTNode* phead,SLTDataType x) {
+	SLTNode* pcur = phead;
+	while (pcur) {
+		if (pcur->data == x) {
+			return pcur;
+		}
+		pcur = pcur->next;
+	}
+	return NULL;
+}
+//insert before 	
+void SLTInsert(SLTNode** pphead,SLTNode* pos, SLTDataType x) {
+	assert(pphead && pos);
+	SLTNode* newnode = SLTbuyNode(x);
+	//if pos points to the first node,use pushfront
+	if (pos == *pphead) {
+		SLTPushFront(pphead, x);
+	}
+	else {
+		//find the previous node of pos
+		SLTNode* pre = *pphead;
+		while (pre->next != pos) {
+			pre = pre->next;
+		}
+		newnode->next = pos;
+		pre->next = newnode;
+	}
+}
+//insert after
+void SLTInsertAfter(SLTNode* pos, SLTDataType x) {
+	assert(pos);
+	SLTNode* newnode = SLTbuyNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;
+}
+//erase the previous node of pos
+void SLTErase(SLTNode** pphead, SLTNode* pos) {
+	assert(pphead && pos &&*pphead);
+    //if pos points to the first node
+	if (*pphead == pos) {
+		SLTPopFront(pphead);
+	}
+	else {
+		SLTNode* pre = *pphead;
+		while (pre->next != pos) {
+			pre = pre->next;
+		}
+		pre->next = pos->next;
+		free(pos);
+		pos = NULL;
+	}
+}
+//erase the node after pos
+void SLTEraseAfter(SLTNode* pos) {
+	assert(pos&&pos->next);
+	SLTNode* after = pos->next;
+	pos->next = after->next;
+	free(after);
+	after = NULL;
+}
+void SListDestroy(SLTNode** pphead) {
+	SLTNode* pcur = *pphead;
+	while (pcur) {
+		SLTNode* next = pcur->next;
+		free(pcur);
+		pcur = next;
+	}
+	*pphead = NULL;
+
+}
+
